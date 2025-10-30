@@ -30,7 +30,7 @@ Week| Date |Topic | Contents | Lecture | Assignment
 3| 10-06 | MRP | Markov reward process| [Lecture 2](lectures/lec2.md) | [Assignment 2](assignments/assign2.md)
 4| 10-13 | MDP | Markov decision process, value functions, policy, Bellman equations | [Lecture 3](lectures/lec3.md) | [Assignment 3](assignments/assign3.md)
 5| 10-20 | Dynamic programming | Policy evaluation, policy improvement, policy iteration | [Lecture 4](lectures/lec4.md) | [Assignment 4](assignments/assign4.md)
-6| | TD | value iteration, Temporal difference learning | [Lecture XX] | [Assignment XX]
+6| 10-27 | Model-free | value iteration, model-free | [Lecture 5](lectures/lec5.md) | No assignment, prepare for lab quiz
 7| | TD | LAB QUIZ, Temporal difference learning | [Lecture XX] | [Assignment XX]
 8| | Midterm | | | 
 9| | QL | Tabular Q-learning, Deep Q-Learning | [Lecture XX] | [Assignment XX]
