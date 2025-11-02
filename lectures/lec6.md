@@ -31,6 +31,12 @@ class: ns-c-center-item
 
 :: content :: 
 
+- Value iteration algorithm 
+- Issues in policy iteration and value iteration algorithms
+- Model free concept
+
+
+
 ---
 layout: top-title
 ---
@@ -125,7 +131,7 @@ layout: top-title
 
 :: title ::
 
-# Monte Carlo Prediction
+# Monte Carlo Prediction - First Visit 
 
 :: content :: 
 
@@ -138,7 +144,7 @@ Returns = defaultdict(list)  # stores returns for each state
 
 # Repeat for each episode
 for episode in range(num_episodes):
-    episode_data = generate_episode(policy)  # generates [(state, reward), ...]
+    episode_data = generate_episode(...)  # generates [(state, reward), ...]
 
     G = 0  # return
     # Calculate the return G for each state in episode backwards
@@ -150,6 +156,11 @@ for episode in range(num_episodes):
             V[state] = sum(Returns[state]) / len(Returns[state])
 ```
 
+<v-click>
+
+The first-visit MC method estimates $v_\pi(s)$ as the average of the returns following first visits to $s$, whereas the every-visit MC method averages the returns following all visits to $s$.
+
+</v-click>
 
 ---
 layout: top-title
@@ -163,9 +174,9 @@ layout: top-title
 
 <div class ="ns-c-tight">
 
-- episode 1 = $S_0, 2, S_1, 5, S_0, 3, S_2, 1$
-- episode 2 = $S_1, 4, S_0, 1, S_2, 3$
-- episode 3 = $S_0, 4, S_0, 1, S_1, 2, S_0, 1, S_2, 2$
+- Episode 1 = $S_0, 2, S_1, 5, S_0, 3, S_2, 1$
+- Episode 2 = $S_1, 4, S_0, 1, S_2, 3$
+- Episode 3 = $S_0, 4, S_0, 1, S_1, 2, S_0, 1, S_2, 2$
 
 </div>
 
@@ -173,21 +184,78 @@ Assume $\gamma=1$
 
 
 ---
-layout: default
+layout: top-title
 ---
 
+:: title ::
 
-|    |        |        |        |        |        |
-|----|--------|--------|--------|--------|--------|
-| Episode 1 | $S_0, 2,$| $S_1, 5,$| $S_0, 3,$| $S_2, 1$ | |
-| Return 1 | 9+2,| 4+5,| 3+1,| 1 | |
-| Value 1 | $S_0=11$| $S_1=9$| | $S_2=1$ | |
-| Episode 2 | $S_1, 4,$| $S_0, 1,$| $S_2, 3,$| | |
-| Return 2 | 4+4,| 1+3,| 3| |
-| Value 2 | $S_0\frac{4+11}{2} = 7.5$| $S_1=\frac{8+9}{2}=5.5$ | $S_2=\frac{3+1}{2} = 2$ | |
-| Episode 3 | $S_0, 4,$| $S_0, 1,$| $S_1, 2,$| $S_0, 1$ | $S_2, 2$ |
-| Return 3 | 6+4,| 5+1,| 3+2,| 2+1 | 2|
-| Value 3 | $S_0=\frac{4+11+10}{3} = 8.3$| $S_1=\frac{8+9+5}{3}=7.3$ | |  | $S_2=\frac{3+1+2}{3} = 2$|
+# Monte Carlo Prediction: Iteration 1
+
+:: content :: 
+
+Episode 1:  
+<span style="color:blue"> $S_0$, $2$, </span>
+<span style="color:green"> $S_1$, $5$, </span>
+<span style="color:blue"> $S_0$, $3$, </span>
+<span style="color:red"> $S_2$, $1$</span>
+
+
+| State | Return ($G$) | Value array before iteration $1$  |Value $v$ after iteration $1$  |
+|-------|--------------|-------------------------|-----------------------------|
+| <span style="color:blue">$S_0$</span> | <span v-click="1" style="color:blue">$9+2=11$</span> | <span v-click="1" style="color:blue;">$\{0\}$</span> | <span v-click="1" style="color:blue;">$11$</span>
+| <span style="color:green">$S_1$</span> | <span v-click="2" style="color:green">$4+5=9$</span> | <span v-click="2" style="color:green;">$\{0\}$</span> | <span v-click="2" style="color:green;">$9$</span> 
+| <span style="color:red">$S_2$</span> | <span v-click="3" style="color:red">$1$</span> | <span v-click="3" style="color:red;">$\{0\}$</span> | <span v-click="3" style="color:red;">$1$</span>
+
+
+---
+layout: top-title
+---
+
+:: title :: 
+
+# Monte Carlo Prediction: Iteration 2
+
+:: content :: 
+
+Episode 2:  
+<span style="color:green"> $S_1$, $4$, </span>
+<span style="color:blue"> $S_0$, $1$, </span>
+<span style="color:red"> $S_2$, $3$</span>
+
+
+| State | Return ($G$) | Value array before iteration $2$  |Value $v$ after iteration $2$  |
+|-------|--------------|-------------------------|-----------------------------|
+| <span style="color:blue">$S_0$</span> | <span v-click="1" style="color:blue">$1+3=4$</span> | <span v-click="1" style="color:blue;">$\{11\}$</span>  | <span v-click="1" style="color:blue;">$(11 + 4)/2 = 7.5$</span> | 
+| <span style="color:green">$S_1$</span> | <span v-click="2" style="color:green">$4+4=8$</span> | <span v-click="2" style="color:green;">$\{9\}$</span> | <span v-click="2" style="color:green;">$(9 + 8)/2 = 8.5$</span> | 
+| <span style="color:red">$S_2$</span> | <span v-click="3" style="color:red">$3$</span> | <span v-click="3" style="color:red;">$\{1\}$</span> | <span v-click="3" style="color:red;">$(1 + 3)/2 = 2$</span> | 
+
+
+---
+layout: top-title
+---
+
+:: title :: 
+
+# Monte Carlo Prediction: Iteration 3
+
+:: content :: 
+
+Episode 3:  
+
+<span style="color:blue">$S_0$, $4$</span>,
+<span style="color:blue">$S_0$, $1$</span>,
+<span style="color:green">$S_1$, $2$</span>, 
+<span style="color:blue">$S_0$, $1$</span>, 
+<span style="color:red">$S_2$, $2$</span>
+
+
+| State | Return ($G$) | Value array before iteration $3$  |Value $v$ after iteration $3$  |
+|-------|--------------|-------------------------|-----------------------------|
+| <span style="color:blue">$S_0$</span> | <span v-click="1" style="color:blue">$6+4=10$</span> | <span v-click="1" style="color:blue;">$\{11,4\}$</span> | <span v-click="1" style="color:blue;">$(11 + 4 + 10)/3 ≈ 8.33$</span>
+| <span style="color:green">$S_1$</span> | <span v-click="2" style="color:green">$3+2=5$</span> | <span v-click="2" style="color:green;">$\{9,8\}$</span> | <span v-click="2" style="color:green;">$(9 + 8 + 5)/3 ≈ 7.33$</span>
+| <span style="color:red">$S_2$</span> | <span v-click="3" style="color:red">$2$</span> | <span v-click="3" style="color:red;">$\{1,3\}$</span> | <span v-click="3" style="color:red;">$(1 + 3 + 2)/3 = 2$</span>
+
+
 
 ---
 layout: fact
@@ -195,26 +263,51 @@ layout: fact
 
 # Where is the policy? 
 
-<!-- ---
-layout: top-title 
+---
+layout: top-title
+---
 
+:: title :: 
 
-:: title ::
-
-# Practical tips
+# How to Estimate $q(s,a)$?
 
 :: content :: 
 
-- Estimate the action by considering a new state that combines state and action 
+- With a model, state values alone are sufficient to determine a policy; one simply looks ahead one step and chooses whichever action leads to the best combination of reward and next state
+- Without a model, state values alone are not sufficient to determine the policy, unlike model-based 
+
+$$ \textcolor{blue}{s_0, a_0, r_0}, \textcolor{green}{s_1, a_1, r_1}, \textcolor{red}{s_2, a_2, r_2}, etc.$$
+
+- One can consider each pair of state-action $(s,a)$ as a new state $k$ and apply the previous algorithm to find the stat-action value function $v_\pi(k) = q(s,a)$
+
+Example: 
+$$ \textcolor{blue}{s_0, RIGHT}, 4, \textcolor{green}{s_0, LEFT}, 1, \textcolor{purple}{s_1, DOWN}, 2, \textcolor{blue}{s_0, RIGHT}, 1, \textcolor{red}{s_2, UP}, 2$$
+$$ \textcolor{blue}{k_0}, 4, \textcolor{green}{k_1}, 1, \textcolor{purple}{k_2}, 2, \textcolor{blue}{k_0}, 1, \textcolor{red}{k_2}, 2$$
+
+---
+layout: top-title 
+---
+
+:: title ::
+
+# Summary and Practical Tips
+
+:: content :: 
+
+- Model-based vs Model-free 
   
-- We do not know which action leads to which state. Therefore, value function alone are not sufficient
+- Monte Carlo Prediction -- estimates from experience 
+  - First visit 
+  - Every visit   
 
-- Update the array immediately or after each iteration 
+- Monte Carlo - Policy: estimate the action by considering a new state that combines state and action 
 
-- We will get into a new problem of modeling only the observed actions. We need to explore other actions. 
-  - exploring starts: every pair (state-action) has a nonzero probability of being selected as the start
-  - $\epsilon-$greedy policy
- -->
+- Value Iteration: update the array immediately or after each iteration 
+
+- We will get into a new problem of modeling only the observed actions. We need to *explore* other actions. 
+  <!-- - exploring starts: every pair (state-action) has a nonzero probability of being selected as the start
+  - $\epsilon-$greedy policy -->
+
 ---
 layout: center
 class: text-center
