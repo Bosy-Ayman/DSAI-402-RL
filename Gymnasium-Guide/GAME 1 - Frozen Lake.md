@@ -11,7 +11,7 @@ Goal → start at `S`, reach goal `G`, avoid holes `H`
 
 ✅ **It’s stochastic (non-deterministic).**
 
-- Even if you choose an action (like "RIGHT"),  
+- Even if we choose an action (like "RIGHT"),  
     the agent **might slip** and move in another direction instead.
 
 For example:
@@ -31,9 +31,9 @@ That means the **same action in the same state** can lead to **different next st
 
 So it’s **a stochastic environment**.
 
-### 2️⃣ **Policy type: You choose**
+### 2️⃣ **Policy type: we choose**
 
-The **policy** depends on your algorithm.
+The **policy** depends on our algorithm.
 
 - If you use **deterministic policy**, it always picks one best action per state.
     
@@ -74,11 +74,60 @@ So you can switch between:
 
 - `is_slippery=True` → **stochastic**
 
-- `is_slippery=False` → **deterministic**
+- `is_slippery=False` → **deterministic
+
+
+---
+
+### 🧩 1️⃣ `is_slippery=False` → Deterministic Environment
+
+- The agent moves **exactly** in the direction you choose.
+    
+- Example:
+    
+    - You press RIGHT → the agent goes RIGHT.
+        
+- This is **deterministic** (no randomness).
+    
+- It’s easy for **Policy Iteration** or **Value Iteration** — they converge fast.
+    
+
+✅ Best for **beginner experiments** and for checking your algorithm logic.
+
+---
+
+### 🌀 2️⃣ `is_slippery=True` → Stochastic Environment
+
+- The agent **might slip**.
+    
+- Example:
+    
+    - You press RIGHT → it could go UP, RIGHT, or DOWN (randomly).
+        
+- This means:
+    
+    - The **transition probabilities** `P[s][a]` include **multiple possible outcomes** for each action.
+        
+- So, your **MDP** becomes **stochastic** (has randomness).
+    
+
+✅ Still works with Policy Iteration  
+⚠️ But it’s **harder** — the agent must learn **expected rewards** rather than certain ones.
+
+---
+
+### 🔢 Example difference in transitions
+
+|Action|is_slippery=False|is_slippery=True|
+|---|---|---|
+|Move RIGHT|Always → next cell right|1/3 chance → up, right, or down|
+|Move UP|Always → next cell up|1/3 chance → left, up, or right|
+ 
 ---
 
 ### Needed Libraries:
 Numpy - gymnasium 
+
 
 ```python
   pip install "gymnasium[toy-text]"
@@ -135,8 +184,6 @@ class PolicyIteration:
 
   
 
-  # 2️⃣ Policy Evaluation
-
   def policy_evaluation(self):
 
     for i in range(self.max_iterations):
@@ -162,7 +209,6 @@ class PolicyIteration:
         break
 
 
-  # 3️⃣ Policy Improvement
 
   def policy_improvement(self):
 
@@ -192,17 +238,13 @@ class PolicyIteration:
 
       self.policy[state] = best_action
 
-  
 
       if old_action != best_action:
 
         policy_stable = False
 
-  
-
     return policy_stable
 
-  
 
 ```
 
@@ -242,7 +284,7 @@ class PolicyIteration:
 
 ```
 
-# 6️⃣ Apply Policy Iteration
+###  Apply Policy Iteration
 
 ```python
 
@@ -254,6 +296,13 @@ optimal_policy = agent.run()
 
 # 7️⃣ Test the learned policy
 
+
+
+```
+
+### Test the learned policy
+
+``` python
 
 state, info = env.reset()
 
@@ -284,9 +333,7 @@ while not done:
 print("\n🏁 Path of visited states:")
 
 print(path)
-
 ```
-
 
 # [2] Value Iteration
 
@@ -379,10 +426,8 @@ class ValueIteration:
 ```
 
 
+### Apply Value Iteration (unwrap env)
 ``` python
-
-
-# 5️⃣ Apply Value Iteration (unwrap env)
 
 
 agent = ValueIteration(env.unwrapped, n_iteration=1000, discount_factor=0.9)
