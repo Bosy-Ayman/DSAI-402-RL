@@ -135,14 +135,12 @@ layout: top-title
 
 :: content :: 
 
-- learning the state-value function
-
+learning the state-value function
 ```python{1,2,3|6,7|9|10,11|12,13|14,15,16|all}
-# Initialize value function V arbitrarily (e.g., all zeros)
 V = defaultdict(float)
 Returns = defaultdict(list)  # stores returns for each state
 
-# Repeat for each episode
+# Loop over all episodes
 for episode in range(num_episodes):
     episode_data = generate_episode(...)  # generates [(state, reward), ...]
 
@@ -155,11 +153,9 @@ for episode in range(num_episodes):
             Returns[state].append(G)
             V[state] = sum(Returns[state]) / len(Returns[state])
 ```
-
 <v-click>
 
 The first-visit MC method estimates $v_\pi(s)$ as the average of the returns following first visits to $s$, whereas the every-visit MC method averages the returns following all visits to $s$.
-
 </v-click>
 
 ---
@@ -278,10 +274,10 @@ layout: top-title
 
 $$ \textcolor{blue}{s_0, a_0, r_0}, \textcolor{green}{s_1, a_1, r_1}, \textcolor{red}{s_2, a_2, r_2}, etc.$$
 
-- One can consider each pair of state-action $(s,a)$ as a new state $k$ and apply the previous algorithm to find the stat-action value function $v_\pi(k) = q(s,a)$
+- One can consider each pair of state-action $(s,a)$ as a new state $k$ and apply the previous algorithm to find the state-action value function $v_\pi(k) = q(s,a)$
 
 Example: 
-$$ \textcolor{blue}{s_0, RIGHT}, 4, \textcolor{green}{s_0, LEFT}, 1, \textcolor{purple}{s_1, DOWN}, 2, \textcolor{blue}{s_0, RIGHT}, 1, \textcolor{red}{s_2, UP}, 2$$
+$$ \textcolor{blue}{s_0, R}, 4, \textcolor{green}{s_0, L}, 1, \textcolor{purple}{s_1, D}, 2, \textcolor{blue}{s_0, R}, 1, \textcolor{red}{s_2, U}, 2$$
 $$ \textcolor{blue}{k_0}, 4, \textcolor{green}{k_1}, 1, \textcolor{purple}{k_2}, 2, \textcolor{blue}{k_0}, 1, \textcolor{red}{k_2}, 2$$
 
 ---
