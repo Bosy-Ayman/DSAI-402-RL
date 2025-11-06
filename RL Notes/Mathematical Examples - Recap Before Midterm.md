@@ -1,7 +1,10 @@
 ### Questions collected from these links:
  https://www.cs.cmu.edu/~15281-s20/recitations/rec8/rec8_sol.pdf
+ 
 https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/value-iteration.html
+
 https://drive.google.com/drive/folders/1G5jykkoGMt8XAPdeOP2kP_ZqghpoFRdz
+
 https://drive.google.com/file/d/11_oVkIcoS-9D8btd7I4j0uIJGExlQeeG/view
 # Question 1 : 
 
