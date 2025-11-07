@@ -10,6 +10,7 @@ https://drive.google.com/file/d/11_oVkIcoS-9D8btd7I4j0uIJGExlQeeG/view
 
 **Explained here:** 
 1- https://www.youtube.com/watch?v=hXaVyWkyEdk&list=PLp8QV47qJEg4jFp_HLrNXALHwISaefUqF&index=5  (25:00 min)
+
 2 - https://www.youtube.com/watch?v=0t-QpSABExg&list=PLp8QV47qJEg79XnSgOCqp7EbjQ-pp9xyp&index=5 (better)
 ## (a) What is the transition function ($T(s,a,s')$)?
 
@@ -691,10 +692,12 @@ You can see that $\pi_2$ matches the optimal policy $\pi^*$ found using value it
 
 ---
 # Question 2 : 
-![[undefined - Imgur.jpg]]
+
+![[question-Rev.jpg]]
 
 ---
 # Question 3 : 
 
 ![[Pasted image 20251107004229.png]]
-# Question 4 : 
+
+--- 
