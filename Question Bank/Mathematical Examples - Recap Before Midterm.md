@@ -26,8 +26,9 @@ This action is **deterministic** (it's not random). The rules state that if the 
 $$T(s, \text{Stop}, \text{Done}) = 1 \quad \text{for } s \in \{0, 2, 3, 4, 5\}$$
 
 ### 2. Action: `Move`
+![Question 1](question_1.png)
 
-![[question_1.png]]
+
 
 This action is **stochastic** (it's random). The car moves 2, 3, or 4 spaces, each with equal probability (1/3). We need to calculate the resulting state ($s'$) for each starting state ($s$).
 
