@@ -26,7 +26,7 @@ This action is **deterministic** (it's not random). The rules state that if the 
 $$T(s, \text{Stop}, \text{Done}) = 1 \quad \text{for } s \in \{0, 2, 3, 4, 5\}$$
 
 ### 2. Action: `Move`
-![Question 1](question_1.png)
+![Question 1](components/question_1.png)
 
 
 
