@@ -694,12 +694,13 @@ You can see that $\pi_2$ matches the optimal policy $\pi^*$ found using value it
 
 ---
 # Question 2 : 
+![Question 2](components/question-Rev.jpg)
 
-![[question-Rev.jpg]]
 
 ---
 # Question 3 : 
 
-![[Pasted image 20251107004229.png]]
+![Question 2](components/question_3.png)
+
 
 --- 
