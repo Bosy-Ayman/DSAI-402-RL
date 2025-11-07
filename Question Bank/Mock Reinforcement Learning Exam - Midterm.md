@@ -205,24 +205,24 @@ The best action is any action: **Up, Down, Left, or Right**, as they all yield t
 
 ### 4.1 Tracking Calculations
 
-| Episode | State |          Return ($G$) (First Visit)          |  Returns Array Before Episode  |                    $V(s)$ After Episode                     |
-| :-----: | :---: | :------------------------------------------: | :----------------------------: | :---------------------------------------------------------: |
-|    1    | $S_0$ |           $2+5+3+1 = \mathbf{11}$            |              {0}               |                    $\mathbf{11/1 = 11}$                     |
-|    1    | $S_1$ |             $5+3+1 = \mathbf{9}$             |  [cite_start]{0} [cite: 493]   |         [cite_start]$\mathbf{9/1 = 9}$ [cite: 530]          |
-|    1    | $S_2$ |                 $\mathbf{1}$                 |  [cite_start]{0} [cite: 494]   |         [cite_start]$\mathbf{1/1 = 1}$ [cite: 540]          |
-|  **2**  | $S_0$ |              $1+3 = \mathbf{4}$              |  [cite_start]{11} [cite: 568]  |      [cite_start]$\mathbf{(11+4)/2 = 7.5}$ [cite: 569]      |
-|  **2**  | $S_1$ | [cite_start]$4+1+3 = \mathbf{8}$ [cite: 609] |  [cite_start]{9} [cite: 589]   |      [cite_start]$\mathbf{(9+8)/2 = 8.5}$ [cite: 590]       |
-|  **2**  | $S_2$ |     [cite_start]$\mathbf{3}$ [cite: 612]     |  [cite_start]{1} [cite: 613]   |       [cite_start]$\mathbf{(1+3)/2 = 2}$ [cite: 614]        |
-|  **3**  | $S_0$ |          $4+1+2+1+2 = \mathbf{10}$           |            {11, 4}             | [cite_start]$\mathbf{(11+4+10)/3 \approx 8.33}$ [cite: 644] |
-|  **3**  | $S_1$ |             $2+1+2 = \mathbf{5}$             |             {9, 8}             |  [cite_start]$\mathbf{(9+8+5)/3 \approx 7.33}$ [cite: 665]  |
-|  **3**  | $S_2$ |                 $\mathbf{2}$                 | [cite_start]{1, 3} [cite: 675] |      [cite_start]$\mathbf{(1+3+2)/3 = 2}$ [cite: 675]       |
+| Episode | State | Return ($G$) (First Visit) | Returns Array Before Episode |        $V(s)$ After Episode         |
+| :-----: | :---: | :------------------------: | :--------------------------: | :---------------------------------: |
+|    1    | $S_0$ |  $2+5+3+1 = \mathbf{11}$   |             {0}              |        $\mathbf{11/1 = 11}$         |
+|    1    | $S_1$ |    $5+3+1 = \mathbf{9}$    |             {0}              |         $\mathbf{9/1 = 9}$          |
+|    1    | $S_2$ |        $\mathbf{1}$        |             {0}              |         $\mathbf{1/1 = 1}$          |
+|  **2**  | $S_0$ |     $1+3 = \mathbf{4}$     |            {11}              |      $\mathbf{(11+4)/2 = 7.5}$      |
+|  **2**  | $S_1$ |    $4+1+3 = \mathbf{8}$    |             {9}              |      $\mathbf{(9+8)/2 = 8.5}$       |
+|  **2**  | $S_2$ |        $\mathbf{3}$        |             {1}              |       $\mathbf{(1+3)/2 = 2}$        |
+|  **3**  | $S_0$ | $4+1+2+1+2 = \mathbf{10}$  |           {11, 4}            | $\mathbf{(11+4+10)/3 \approx 8.33}$ |
+|  **3**  | $S_1$ |    $2+1+2 = \mathbf{5}$    |            {9, 8}            |  $\mathbf{(9+8+5)/3 \approx 7.33}$  |
+|  **3**  | $S_2$ |        $\mathbf{2}$        |            {1, 3}            |      $\mathbf{(1+3+2)/3 = 2}$       |
 
 ### 4.2 Action-Value Estimation
 
 In the Model-Free setting, $q_{\pi}(s,a)$ is estimated by considering each **state-action pair $(s,a)$ as a single composite state $k$**.
 
 * The algorithm averages the **returns ($G$) that follow the first time the specific pair $(s,a)$** is visited in an episode.
-* This circumvents the need for the environment model because the value is learned directly from the observed experience $s_0, a_0, r_0, s_1, a_1, r_1, \dots$[.
+* This circumvents the need for the environment model because the value is learned directly from the observed experience $s_0, a_0, r_0, s_1, a_1, r_1, \dots$.
 
 ---
 
@@ -232,8 +232,8 @@ In the Model-Free setting, $q_{\pi}(s,a)$ is estimated by considering each **sta
 
 * **Dilemma:** The agent must choose between:
     * **Exploitation:** Taking the action that is currently known to yield the highest reward to maximize the immediate return.
-    * **Exploration:** Taking a suboptimal or untried action to discover more accurate state/action values or potentially higher rewards in the long run. [cite: 1239]
-* [cite_start]**Why it's pronounced in Model-Free RL:** In Model-Free learning, the true $q(s,a)$ values are initially unknown and are only estimations based on sampled experience[cite: 283]. [cite_start]If the agent only exploits its current best estimate (which could be inaccurate), it might never discover the truly optimal action, especially if that action has a large negative immediate reward but a large positive future reward. [cite: 706]
+    * **Exploration:** Taking a suboptimal or untried action to discover more accurate state/action values or potentially higher rewards in the long run. 
+* **Why it's pronounced in Model-Free RL:** In Model-Free learning, the true $q(s,a)$ values are initially unknown and are ==only estimations based on sampled experience==. If the agent only exploits its current best estimate (which could be inaccurate), it might never discover the truly optimal action, especially if that action has a large negative immediate reward but a large positive future reward. 
 
 ### 5.2 Not Greedy Example Analysis
 
@@ -246,5 +246,5 @@ In the Model-Free setting, $q_{\pi}(s,a)$ is estimated by considering each **sta
 1.  **a. Immediate Greedy Choice:** The agent would choose the action leading to **T** (reward: 3), as it provides the highest immediate reward.
 2.  **b. Optimal Policy and Lesson:**
     * **Optimal Policy:** The optimal action from the Start State is the one leading to **S**, as it yields the maximum total return of $\mathbf{1}$.
-    * **Key Lesson:** This example illustrates the importance of considering the **Delayed Reward**. A choice that is locally greedy (maximizing the immediate reward) is globally poor (resulting in a total return of $-17$), while the optimal policy must optimize the total **accumulated reward** over time.
+    * **Key Lesson:** This example illustrates the importance of considering the **Delayed Reward**. A choice that is locally greedy (maximizing the immediate reward) is globally poor (resulting in a total return of $-17$), while ==the optimal policy must optimize the total **accumulated reward** over time.==
 

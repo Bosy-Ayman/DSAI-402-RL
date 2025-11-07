@@ -6,7 +6,37 @@ https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/value-iteration.html
 https://drive.google.com/drive/folders/1G5jykkoGMt8XAPdeOP2kP_ZqghpoFRdz
 
 https://drive.google.com/file/d/11_oVkIcoS-9D8btd7I4j0uIJGExlQeeG/view
-# Question 1 : 
+
+https://davidstarsilver.wordpress.com/wp-content/uploads/2025/04/previous-rl-exam-questions-.pdf
+**Answers:** https://davidstarsilver.wordpress.com/wp-content/uploads/2025/04/previous-rl-exam-answers.pdf
+# Question 1 - Definitions: 
+
+ **(a) What is the Markov Property?**
+The Markov Property states that action outcomes depend on the current state only (action outcomes do not depend on the past states and actions). 
+
+**(b) What are the Bellman equations, and when are they used?**
+
+The Bellman Equations give a definition of "optimal utility" via expectimax recurrence. They give a one-step lookahead relationship between utilities at a current time step and the next time step. 
+
+ **(c) What is a policy? What is an optimal policy?**
+A policy is a function that maps states to actions; (s) gives an action for state s. An optimal policy is a policy that maximizes the expected utility if an agent follows it.
+
+ **(d) How does the discount factor affect how the agent finds the optimal policy? Why do we restrict gamma 0 <GAMMA <1? **
+ 
+determines how much the value of a state should take into account the value of future states that the agent could wind up in. A gamma 0< <1helps our algorithms converge and to prevents against infinite rewards if our game lasts forever. 
+
+ **(e) Fill in the following table explaining the effects of having different gamma values: **
+
+| GAMMA    | Effect on policy search:                                                                                                                                                               |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GAMMA= 0 | A smaller indicates smaller “horizon,” =0 or a shorter term focus. When is 0, we only consider immediate rewards. We do not consider rewards in the future as having any value.        |
+| GAMMA= 1 | The higher the discount factor, the more =1 the state would value distant future states. When is 1, we begin to act as though rewards at any given point in time are equally valuable. |
+|          |                                                                                                                                                                                        |
+**(f) What are two steps to Policy Iteration?**
+
+Policy evaluation and policy improvement.
+
+# Question 2 - Policy Iteration & Value Iteration: 
 
 **Explained here:** 
 1- https://www.youtube.com/watch?v=hXaVyWkyEdk&list=PLp8QV47qJEg4jFp_HLrNXALHwISaefUqF&index=5  (25:00 min)
@@ -26,6 +56,7 @@ This action is **deterministic** (it's not random). The rules state that if the 
 $$T(s, \text{Stop}, \text{Done}) = 1 \quad \text{for } s \in \{0, 2, 3, 4, 5\}$$
 
 ### 2. Action: `Move`
+
 ![Question 1](components/question_1.png)
 
 
@@ -693,14 +724,16 @@ You can see that $\pi_2$ matches the optimal policy $\pi^*$ found using value it
 
 
 ---
-# Question 2 : 
+# Question 3- Value Iteration : 
+
 ![Question 2](components/question-Rev.jpg)
 
 
 ---
-# Question 3 : 
+# Question 4 : 
 
 ![Question 2](components/question_3.png)
 
 
 --- 
+# Question 5 : 
