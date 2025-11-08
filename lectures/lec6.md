@@ -136,7 +136,7 @@ layout: top-title
 :: content :: 
 
 learning the state-value function
-```python{1,2,3|6,7|9|10,11|12,13|14,15,16|all}
+```python
 V = defaultdict(float)
 Returns = defaultdict(list)  # stores returns for each state
 
@@ -219,11 +219,11 @@ Episode 2:
 <span style="color:red"> $S_2$, $3$</span>
 
 
-| State | Return ($G$) | Value array before iteration $2$  |Value $v$ after iteration $2$  |
-|-------|--------------|-------------------------|-----------------------------|
-| <span style="color:blue">$S_0$</span> | <span v-click="1" style="color:blue">$1+3=4$</span> | <span v-click="1" style="color:blue;">$\{11\}$</span>  | <span v-click="1" style="color:blue;">$(11 + 4)/2 = 7.5$</span> | 
-| <span style="color:green">$S_1$</span> | <span v-click="2" style="color:green">$4+4=8$</span> | <span v-click="2" style="color:green;">$\{9\}$</span> | <span v-click="2" style="color:green;">$(9 + 8)/2 = 8.5$</span> | 
-| <span style="color:red">$S_2$</span> | <span v-click="3" style="color:red">$3$</span> | <span v-click="3" style="color:red;">$\{1\}$</span> | <span v-click="3" style="color:red;">$(1 + 3)/2 = 2$</span> | 
+| State                                  | Return ($G$)                                         | Value array before iteration $2$                      | Value $v$ after iteration $2$                                   |     |
+| -------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------------------- | --- |
+| <span style="color:blue">$S_0$</span>  | <span v-click="1" style="color:blue">$1+3=4$</span>  | <span v-click="1" style="color:blue;">$\{11\}$</span> | <span v-click="1" style="color:blue;">$(11 + 4)/2 = 7.5$</span> |     |
+| <span style="color:green">$S_1$</span> | <span v-click="2" style="color:green">$4+4=8$</span> | <span v-click="2" style="color:green;">$\{9\}$</span> | <span v-click="2" style="color:green;">$(9 + 8)/2 = 8.5$</span> |     |
+| <span style="color:red">$S_2$</span>   | <span v-click="3" style="color:red">$3$</span>       | <span v-click="3" style="color:red;">$\{1\}$</span>   | <span v-click="3" style="color:red;">$(1 + 3)/2 = 2$</span>     |     |
 
 
 ---

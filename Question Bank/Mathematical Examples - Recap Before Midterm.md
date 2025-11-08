@@ -7,7 +7,12 @@ https://drive.google.com/drive/folders/1G5jykkoGMt8XAPdeOP2kP_ZqghpoFRdz
 
 https://drive.google.com/file/d/11_oVkIcoS-9D8btd7I4j0uIJGExlQeeG/view
 
+https://www.cs.cmu.edu/afs/cs/academic/class/15381-s07/www/final/final_solutions07.pdf
+
+https://courses.cs.washington.edu/courses/cse573/10au/midterm1-solutions.pdf  (contains MDP)
+
 https://davidstarsilver.wordpress.com/wp-content/uploads/2025/04/previous-rl-exam-questions-.pdf
+
 **Answers:** https://davidstarsilver.wordpress.com/wp-content/uploads/2025/04/previous-rl-exam-answers.pdf
 # Question 1 - Definitions: 
 
@@ -21,9 +26,10 @@ The Bellman Equations give a definition of "optimal utility" via expectimax recu
  **(c) What is a policy? What is an optimal policy?**
 A policy is a function that maps states to actions; (s) gives an action for state s. An optimal policy is a policy that maximizes the expected utility if an agent follows it.
 
- **(d) How does the discount factor affect how the agent finds the optimal policy? Why do we restrict gamma 0 <GAMMA <1? **
+ **(d) How does the discount factor affect how the agent finds the optimal policy? Why do we restrict gamma 0 <GAMMA <1?**
  
-determines how much the value of a state should take into account the value of future states that the agent could wind up in. A gamma 0< <1helps our algorithms converge and to prevents against infinite rewards if our game lasts forever. 
+determines how much the value of a state should take into account the value of future states that the agent could wind up in. A gamma 0<gamma <1 helps our algorithms converge and to prevents against infinite rewards if our game lasts forever. 
+(a) What are the key distinctions between the value iteration and policy iteration algorithms, and when might you prefer one to the other? Key distinctions (possible answers): policy iteration is focused on evaluating the policies themselves, while value iteration evaluates states or state-action pairs and implicitly derives a policy from there.
 
  **(e) Fill in the following table explaining the effects of having different gamma values: **
 
@@ -35,6 +41,10 @@ determines how much the value of a state should take into account the value of f
 **(f) What are two steps to Policy Iteration?**
 
 Policy evaluation and policy improvement.
+
+**(g) What are the key distinctions between the value iteration and policy iteration algorithms, and when might you prefer one to the other**
+
+Key distinctions (possible answers): policy iteration is focused on evaluating the policies themselves, while value iteration evaluates states or state-action pairs and implicitly derives a policy from there.
 
 # Question 2 - Policy Iteration & Value Iteration: 
 
@@ -736,4 +746,260 @@ You can see that $\pi_2$ matches the optimal policy $\pi^*$ found using value it
 
 
 --- 
-# Question 5 : 
+# Question 5 :
+![Question 5](components/question_3.png)
+
+# Question 6: - Value - Policy Iteration
+![[question_4.png]]
+
+
+## 🤖 Value Iteration Example
+
+We will compute the optimal state values, $V^*(s)$, using value iteration. This process iteratively updates the value of each state based on the values of its neighbors, following the Bellman equation.
+
+We have three states: $S = \{\text{cool}, \text{warm}, \text{overheated}\}$.
+
+From the equations, we can infer the discount factor is $\gamma = 0.5$.
+
+### Initialization ($k=0$)
+
+We begin by initializing the value $V_0(s)$ of all states to 0.
+
+|**State**|**V0​(s)**|
+|---|---|
+|cool|0|
+|warm|0|
+|overheated|0|
+
+---
+
+### Iteration 1 ($k=1$)
+
+Now, we compute $V_1(s)$ for all states using the values from $V_0$.
+
+- For $s = \text{cool}$:
+    
+    $V_1(\text{cool}) = \max \begin{cases} \text{Action 'slow'}: & 1 \cdot [1 + 0.5 \cdot V_0(\text{cool})] \\ \text{Action 'fast'}: & 0.5 \cdot [2 + 0.5 \cdot V_0(\text{cool})] + 0.5 \cdot [2 + 0.5 \cdot V_0(\text{warm})] \end{cases}$
+    
+    $V_1(\text{cool}) = \max \{ 1 \cdot [1 + 0.5 \cdot 0], \quad 0.5 \cdot [2 + 0.5 \cdot 0] + 0.5 \cdot [2 + 0.5 \cdot 0] \}$
+    
+    $V_1(\text{cool}) = \max \{1, 2\} = \mathbf{2}$
+    
+- For $s = \text{warm}$:
+    
+    $V_1(\text{warm}) = \max \begin{cases} \text{Action 'slow'}: & 0.5 \cdot [1 + 0.5 \cdot V_0(\text{cool})] + 0.5 \cdot [1 + 0.5 \cdot V_0(\text{warm})] \\ \text{Action 'fast'}: & 1 \cdot [-10 + 0.5 \cdot V_0(\text{overheated})] \end{cases}$
+    
+    $V_1(\text{warm}) = \max \{ 0.5 \cdot [1 + 0.5 \cdot 0] + 0.5 \cdot [1 + 0.5 \cdot 0], \quad 1 \cdot [-10 + 0.5 \cdot 0] \}$
+    
+    $V_1(\text{warm}) = \max \{1, -10\} = \mathbf{1}$
+    
+- For $s = \text{overheated}$:
+    
+    The state 'overheated' is a terminal state. No actions can be taken from it, so its value is permanently 0.
+    
+    $V_1(\text{overheated}) = \mathbf{0}$
+    
+
+---
+
+### Iteration 2 ($k=2$)
+
+Next, we repeat the procedure to compute $V_2(s)$, this time using the values from $V_1(s) = \{ \text{cool}: 2, \text{warm}: 1, \text{overheated}: 0 \}$.
+
+- For $s = \text{cool}$:
+    
+    $V_2(\text{cool}) = \max \{ 1 \cdot [1 + 0.5 \cdot V_1(\text{cool})], \quad 0.5 \cdot [2 + 0.5 \cdot V_1(\text{cool})] + 0.5 \cdot [2 + 0.5 \cdot V_1(\text{warm})] \}$
+    
+    $V_2(\text{cool}) = \max \{ 1 \cdot [1 + 0.5 \cdot 2], \quad 0.5 \cdot [2 + 0.5 \cdot 2] + 0.5 \cdot [2 + 0.5 \cdot 1] \}$
+    
+    $V_2(\text{cool}) = \max \{ 1 \cdot [2], \quad 0.5 \cdot [3] + 0.5 \cdot [2.5] \}$
+    
+    $V_2(\text{cool}) = \max \{2, \quad 1.5 + 1.25\} = \max \{2, 2.75\} = \mathbf{2.75}$
+    
+- For $s = \text{warm}$:
+    
+    $V_2(\text{warm}) = \max \{ 0.5 \cdot [1 + 0.5 \cdot V_1(\text{cool})] + 0.5 \cdot [1 + 0.5 \cdot V_1(\text{warm})], \quad 1 \cdot [-10 + 0.5 \cdot V_1(\text{overheated})] \}$
+    
+    $V_2(\text{warm}) = \max \{ 0.5 \cdot [1 + 0.5 \cdot 2] + 0.5 \cdot [1 + 0.5 \cdot 1], \quad 1 \cdot [-10 + 0.5 \cdot 0] \}$
+    
+    $V_2(\text{warm}) = \max \{ 0.5 \cdot [2] + 0.5 \cdot [1.5], \quad -10 \}$
+    
+    $V_2(\text{warm}) = \max \{1 + 0.75, -10\} = \mathbf{1.75}$
+    
+- For $s = \text{overheated}$:
+    
+    As a terminal state, its value remains 0.
+    
+    $V_2(\text{overheated}) = \mathbf{0}$
+    
+
+---
+
+### Summary of Values
+
+This table summarizes the computed values after two iterations. This process would be repeated until the values converge (i.e., $V_{k+1}(s) \approx V_k(s)$ for all $s$).
+
+|**State**|**V0​(s)**|**V1​(s)**|**V2​(s)**|
+|---|---|---|---|
+|**cool**|0|2|2.75|
+|**warm**|0|1|1.75|
+|**overheated**|0|0|0|
+
+---
+
+## 4.3.1 Policy Extraction
+
+Once value iteration has converged to the optimal values $V^*(s)$, our ultimate goal is to determine the optimal policy $\pi^*(s)$.
+
+This process is called **policy extraction**. The intuition is very simple: if you are in a state $s$, you should take the action $a$ that yields the maximum expected utility. This action is the one with the maximum Q-value.
+
+The optimal policy is formally defined as finding the action that maximizes the Q-value:
+
+$$\pi^*(s) = \arg\max_a Q^*(s, a)$$
+
+Where the optimal Q-value $Q^*(s, a)$ is calculated using the optimal state values $V^*(s)$ from our value iteration:
+
+$$Q^*(s, a) = \sum_{s'} T(s, a, s') [R(s, a, s') + \gamma V^*(s')]$$
+
+Combining these, the full equation for extracting the policy $\pi^*(s)$ from the values $V^*(s)$ is:
+
+$$\pi^*(s) = \arg\max_a \sum_{s'} T(s, a, s') [R(s, a, s') + \gamma V^*(s')]$$
+
+> Performance Note:
+> 
+> It's useful to consider what to store for performance reasons.
+> 
+> - If you store the final **Q-values** ($Q^*(s, a)$), finding the optimal action is a simple $\arg\max$ operation.
+>     
+> - If you only store the final **V-values** ($V^*(s)$), you must recompute all the Q-values for a given state $s$ just to find the best action. This is equivalent to performing a depth-1 expectimax search every time you need to act.
+>     
+
+---
+## 4.4 🤖 Policy Iteration
+
+Value iteration can be quite slow. At each iteration $k$, we must update the values of all $|S|$ states. Each state update requires iterating over all $|A|$ actions to compute their Q-values. Computing each Q-value, in turn, requires iterating over all $|S|$ possible next states $s'$. This leads to a runtime of **$O(|S|^2 |A|)$** per iteration.
+
+Furthermore, when our goal is just to find the optimal policy, value iteration often does unnecessary work. The optimal policy (as found by policy extraction) generally converges much faster than the state values themselves.
+
+An alternative algorithm, **policy iteration**, addresses these issues. It maintains the same optimality as value iteration but often provides significant performance gains.
+
+### The Policy Iteration Algorithm
+
+Policy iteration operates in a loop with two main steps:
+
+1. **Initialize Policy:** Start with an initial policy, $\pi_0$. This can be arbitrary, but the algorithm will converge faster if $\pi_0$ is close to the optimal policy.
+    
+2. **Repeat Until Convergence:**
+    
+    - **(a) Policy Evaluation:** Evaluate the current policy $\pi_i$ by computing the utility $V^{\pi_i}(s)$ for all states $s$. $V^{\pi_i}(s)$ is the expected utility of starting in state $s$ and following policy $\pi_i$ forever.
+        
+        > This requires solving a system of $|S|$ linear equations. For each state $s$, the value is defined by the Bellman equation without the $\max$ operator, since the action $\pi_i(s)$ is fixed:
+        > 
+        > $$V^{\pi_i}(s) = \sum_{s'} T(s, \pi_i(s), s') [R(s, \pi_i(s), s') + \gamma V^{\pi_i}(s')]$$
+        > 
+        > (Alternatively, one can compute $V^{\pi_i}(s)$ by iteratively applying this update rule until its values converge, but solving the system of equations directly is typically faster in practice.)
+        
+    - **(b) Policy Improvement:** Once $V^{\pi_i}(s)$ is known, generate a new, better policy $\pi_{i+1}$ by acting greedily. This is done using the same policy extraction method as before, but using the $V^{\pi_i}$ values:
+        
+        > $$\pi_{i+1}(s) = \arg\max_a \sum_{s'} T(s, a, s') [R(s, a, s') + \gamma V^{\pi_i}(s')]$$
+        
+3. **Check Convergence:** If the new policy is the same as the old one ($\pi_{i+1} = \pi_i$), the algorithm has converged. We can conclude that $\pi_i = \pi^*$, the optimal policy.
+    
+
+---
+
+### Example: Racecar MDP
+
+Let's run policy iteration on our racecar example, using the same discount factor of **$\gamma = 0.5$**.
+
+**Iteration 0: Initialization**
+
+We start with an arbitrary initial policy, $\pi_0$: **Always go slow**.
+
+|**State**|**π0​(s)**|
+|---|---|
+|cool|slow|
+|warm|slow|
+|overheated|—|
+
+> **Note:** As 'overheated' is a terminal state, it has no outgoing actions. We can disregard it from policy calculations and permanently set $V(overheated) = 0$.
+
+---
+
+**Iteration 1: (Evaluation + Improvement)**
+
+**(a) Policy Evaluation (for $\pi_0$)**
+
+We must solve for $V^{\pi_0}(\text{cool})$ and $V^{\pi_0}(\text{warm})$ using the system of equations defined by $\pi_0$ (always 'slow').
+
+- $V^{\pi_0}(\text{cool}) = 1 \cdot [1 + 0.5 \cdot V^{\pi_0}(\text{cool})]$
+    
+- $V^{\pi_0}(\text{warm}) = 0.5 \cdot [1 + 0.5 \cdot V^{\pi_0}(\text{cool})] + 0.5 \cdot [1 + 0.5 \cdot V^{\pi_0}(\text{warm})]$
+    
+
+Solving this system yields the following values:
+
+|**State**|**Vπ0​(s)**|
+|---|---|
+|**cool**|2|
+|**warm**|2|
+|**overheated**|0|
+
+**(b) Policy Improvement (to find $\pi_1$)**
+
+Now we act greedily with respect to these values, $V^{\pi_0}$, to find the new policy $\pi_1$.
+
+- For $s = \text{cool}$:
+    
+    $\pi_1(\text{cool}) = \arg\max \begin{cases} \text{slow}: & 1 \cdot [1 + 0.5 \cdot V^{\pi_0}(\text{cool})] \\ \text{fast}: & 0.5 \cdot [2 + 0.5 \cdot V^{\pi_0}(\text{cool})] + 0.5 \cdot [2 + 0.5 \cdot V^{\pi_0}(\text{warm})] \end{cases}$
+    
+    $\pi_1(\text{cool}) = \arg\max \{ \text{slow}: 1[1 + 0.5 \cdot 2], \quad \text{fast}: 0.5[2 + 0.5 \cdot 2] + 0.5[2 + 0.5 \cdot 2] \}$
+    
+    $\pi_1(\text{cool}) = \arg\max \{ \text{slow}: 2, \quad \text{fast}: 3 \} = \mathbf{fast}$
+    
+- For $s = \text{warm}$:
+    
+    $\pi_1(\text{warm}) = \arg\max \begin{cases} \text{slow}: & 0.5 \cdot [1 + 0.5 \cdot V^{\pi_0}(\text{cool})] + 0.5 \cdot [1 + 0.5 \cdot V^{\pi_0}(\text{warm})] \\ \text{fast}: & 1 \cdot [-10 + 0.5 \cdot V^{\pi_0}(\text{overheated})] \end{cases}$
+    
+    $\pi_1(\text{warm}) = \arg\max \{ \text{slow}: 0.5[1 + 0.5 \cdot 2] + 0.5[1 + 0.5 \cdot 2], \quad \text{fast}: 1[-10 + 0.5 \cdot 0] \}$
+    
+    $\pi_1(\text{warm}) = \arg\max \{ \text{slow}: 2, \quad \text{fast}: -10 \} = \mathbf{slow}$
+    
+
+Our new policy is $\pi_1 = \{ \text{cool}: \text{fast}, \text{warm}: \text{slow} \}$.
+
+Since $\pi_1 \neq \pi_0$, we have not converged and must continue.
+
+---
+
+**Iteration 2: (Evaluation + Improvement)**
+
+**(a) Policy Evaluation (for $\pi_1$)**
+
+The text notes that running the evaluation step for $\pi_1$ (which involves solving a new system of equations) and then the improvement step yields $\pi_2 = \{ \text{cool}: \text{fast}, \text{warm}: \text{slow} \}$.
+
+**(b) Policy Improvement (to find $\pi_2$)**
+
+The resulting policy is $\pi_2 = \{ \text{cool}: \text{fast}, \text{warm}: \text{slow} \}$.
+
+---
+
+### Convergence
+
+We compare the policies from each iteration:
+
+|**State**|**π0​(s)**|**π1​(s)**|**π2​(s)**|
+|---|---|---|---|
+|**cool**|slow|fast|fast|
+|**warm**|slow|slow|slow|
+
+Since **$\pi_2 = \pi_1$**, the algorithm has converged. We can confidently state that the optimal policy is $\pi^* = \pi_1$.
+
+This example shows the true power of policy iteration. With only two iterations, we arrived at the optimal policy. This is much faster than value iteration, which was still several iterations away from converging after two updates.
+
+2. Consider an undiscounted Markov Reward Process with two states A and B. The transition matrix and reward function are unknown, but you have observed two sample episodes: A+3 → A+2 → B−4 → A+4 → B−3 → terminate B−2 → A+3 → B−3 → terminate In the above episodes, sample state transitions and sample rewards are shown at each step, e.g. A+3 → A indicates a transition from state A to state A, with a reward of +3. • Using first-visit Monte-Carlo evaluation, estimate the state-value functionV(A),V(B)
+---
+
+# Question 7
+![[Pasted image 20251107194305.png]]
+![[Pasted image 20251107194325.png]]

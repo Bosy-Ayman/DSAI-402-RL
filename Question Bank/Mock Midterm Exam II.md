@@ -9,12 +9,8 @@ This exam focuses on:
 - **Conceptual Comparison:** The critical differences between Model-Based and Model-Free learning.
     
 - **Numerical Tracing:** A multi-step calculation problem (Monte Carlo) taken directly from the lecture examples.
-    
 
 ---
-
-## 📝 Mock Reinforcement Learning Exam  (DSAI 402)
-
 ### Question 1: Foundational Concepts (12 Points)
 
 1. **Markov Decision Process (MDP):** An MDP is formally defined by a 5-tuple. List and briefly describe **three** of these components.
@@ -36,7 +32,7 @@ Consider the **Vending Machine** example from Lecture 4.
     
 - The rewards are: $R(A)=1$, $R(B)=2$, $R(C)=3$.
     
-- The environment is deterministic, and the episode ends after one action6.
+- The environment is deterministic, and the episode ends after one action.
     
 
 1. **Calculate $v_{\pi}(s)$:** Assume the agent is following a stochastic policy $\pi$ defined as:
@@ -47,7 +43,7 @@ Consider the **Vending Machine** example from Lecture 4.
         
     - $\pi(C|s) = 0.5$
         
-        Calculate the value of the start state, $v_{\pi}(s)$, under this policy7. Show your work.
+        Calculate the value of the start state, $v_{\pi}(s)$, under this policy. Show your work.
         
 1. **Optimal Value:** What is the optimal value $v_{*}(s)$ for this state, and what is the optimal policy $\pi_{*}(a|s)$ that achieves it?
     
@@ -148,7 +144,6 @@ Fill in the table below. Show the Return ($G$) calculated for the first visit to
     
     $$v_{\pi}(s) = 0.2 + 0.6 + 1.5 = \mathbf{2.3}$$
     
-    25
     
 2. **Optimal Value:**
     
@@ -157,13 +152,76 @@ Fill in the table below. Show the Return ($G$) calculated for the first visit to
     - $\pi_{*}(a|s)$ is the deterministic policy $\pi(C|s) = 1$ and 0 for all other actions.
         
 3. **Analysis:** The value $v_{\pi}(s)=2.3$ is lower than $v_{*}(s)=3$ because the policy $\pi$ wastes probability (0.2 and 0.3) on suboptimal actions (A and B) instead of putting 100% probability on the optimal action (C).
+### **Note:**
+
+### 🧠 1. What is ( v_*(s) )?
+
+By definition:   
+v_*(s) =[G_t | S_t = s]  
+
+That means:
+
+> "The **maximum expected return** achievable from state (s), if we follow the **best possible policy**."
+
+---
+
+### ⚙️ 2. What is a “return” here?
+
+The **return** (G_t) is the sum of rewards over time:  
+[  
+G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots  
+]
+
+But in this **vending machine example**, the episode ends **after one action** — so there’s only **one reward**.
+
+So:  
+G_t = R_{t+1}  
+That means the **value** of the state is just the **expected immediate reward**.
+
+---
+
+### 🍪 3. Why we maximize only on the reward?
+
+Because:
+
+- There’s **no next state**, no continuation, and no future discounted rewards.
     
+- The environment ends right after one action.
+    
+- So the **only thing that matters** is which action gives the **highest immediate reward**.
+    
+
+Hence:  
+[  
+v_*(s) = \max_a R(a)  
+]
+
+---
+
+### 🧩 4. In multi-step problems
+
+If the environment continued for several steps (like in most RL tasks),  
+then we would maximize the **expected return**, which includes **future rewards** and depends on both **rewards** and **transitions**:  
+[ 
+v__(s) = \max_a \Big[ R(s,a) + \gamma \sum_{s'} P(s'|s,a) v__(s') \Big]  
+
+
+But here, since it’s **only one step**, that big expression collapses to simply:  
+[  
+v_*(s) = \max_a R(s,a)  
+]
+
+---
+
+✅ **In short:**  
+
+We maximize only the reward because the episode has one step — no future rewards, no transitions — so the value of the state equals the best immediate reward possible.
 
 ---
 
 ### Question 3: Policy Iteration Algorithm
 
-1. **The Loop:** The two steps are **Policy Evaluation** and **Policy Improvement**28.
+1. **The Loop:** The two steps are **Policy Evaluation** and **Policy Improvement**.
     
 2. **Policy Evaluation:** This step computes the state-value function $v_{\pi}$ for the _current, fixed_ policy $\pi$.  It does this by iteratively applying the Bellman Expectation Equation as an update rule ($v_k \to v_{k+1}$) until the values converge for all states.
     
