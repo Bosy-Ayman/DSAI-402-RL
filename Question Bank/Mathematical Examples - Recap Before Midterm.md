@@ -750,10 +750,9 @@ You can see that $\pi_2$ matches the optimal policy $\pi^*$ found using value it
 
 
 --- 
-# Question 5 :
-![Question 5](components/question_3.png)
 
-# Question 6: - Value - Policy Iteration
+
+# Question 5: - Value - Policy Iteration
 ![Question 1](components/question_4.png)
 ## 🤖 Value Iteration Example
 
@@ -1002,7 +1001,7 @@ This example shows the true power of policy iteration. With only two iterations,
 2. Consider an undiscounted Markov Reward Process with two states A and B. The transition matrix and reward function are unknown, but you have observed two sample episodes: A+3 → A+2 → B−4 → A+4 → B−3 → terminate B−2 → A+3 → B−3 → terminate In the above episodes, sample state transitions and sample rewards are shown at each step, e.g. A+3 → A indicates a transition from state A to state A, with a reward of +3. • Using first-visit Monte-Carlo evaluation, estimate the state-value functionV(A),V(B)
 ---
 
-# Question 7
+# Question 6
 ![Question 1](components/question_6.png)
 
 This question asks for the first two rounds of **Value Iteration** updates for each non-terminal state in the given Gridworld MDP, using a discount factor of $\gamma = 0.9$ and assuming $V_0(s) = 0$ for all states $s$.
