@@ -993,7 +993,7 @@ Since **$\pi_2 = \pi_1$**, the algorithm has converged. We can confidently state
 
 This example shows the true power of policy iteration. With only two iterations, we arrived at the optimal policy. This is much faster than value iteration, which was still several iterations away from converging after two updates.
 
-2. Consider an undiscounted Markov Reward Process with two states A and B. The transition matrix and reward function are unknown, but you have observed two sample episodes: A+3 → A+2 → B−4 → A+4 → B−3 → terminate B−2 → A+3 → B−3 → terminate In the above episodes, sample state transitions and sample rewards are shown at each step, e.g. A+3 → A indicates a transition from state A to state A, with a reward of +3. • Using first-visit Monte-Carlo evaluation, estimate the state-value functionV(A),V(B)
+2. Consider an undiscounted Markov Reward Process with two states A and B. The transition matrix and reward function are unknown, but you have observed two sample episodes: A+3 → A+2 → B−4 → A+4 → B−3 → terminate B−2 → A+3 → B−3 → terminate In the above episodes, sample state transitions and sample rewards are shown at each step, e.g. A+3 → A indicates a transition from state A to state A, with a reward of +3. 
 ---
 
 
