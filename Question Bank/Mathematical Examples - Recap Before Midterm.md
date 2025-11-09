@@ -750,9 +750,7 @@ You can see that $\pi_2$ matches the optimal policy $\pi^*$ found using value it
 ![Question 5](components/question_3.png)
 
 # Question 6: - Value - Policy Iteration
-![[question_4.png]]
-
-
+![Question 1](components/question_4.png)
 ## 🤖 Value Iteration Example
 
 We will compute the optimal state values, $V^*(s)$, using value iteration. This process iteratively updates the value of each state based on the values of its neighbors, following the Bellman equation.
@@ -1001,5 +999,6 @@ This example shows the true power of policy iteration. With only two iterations,
 ---
 
 # Question 7
-![[Pasted image 20251107194305.png]]
-![[Pasted image 20251107194325.png]]
+![Question 1](components/question_6.png)
+
+![Question 1](components/question_6_1.png)
