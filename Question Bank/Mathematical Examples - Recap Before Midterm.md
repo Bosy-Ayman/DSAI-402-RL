@@ -743,16 +743,11 @@ You can see that $\pi_2$ matches the optimal policy $\pi^*$ found using value it
 ![Question 2](components/question-Rev.jpg)
 
 
----
-# Question 4: 
-
-![Question 2](components/question_3.png)
-
 
 --- 
 
 
-# Question 5: - Value - Policy Iteration
+# Question 4: - Value - Policy Iteration
 ![Question 1](components/question_4.png)
 ## 🤖 Value Iteration Example
 
