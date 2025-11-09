@@ -1004,6 +1004,7 @@ This example shows the true power of policy iteration. With only two iterations,
 
 # Question 7
 ![Question 1](components/question_6.png)
+
 This question asks for the first two rounds of **Value Iteration** updates for each non-terminal state in the given Gridworld MDP, using a discount factor of $\gamma = 0.9$ and assuming $V_0(s) = 0$ for all states $s$.
 
 The **Value Iteration update** for the value of state $s$ at iteration $i+1$ is given by the Bellman optimality equation:
