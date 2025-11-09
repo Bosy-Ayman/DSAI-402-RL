@@ -31,7 +31,7 @@ A policy is a function that maps states to actions; (s) gives an action for stat
 determines how much the value of a state should take into account the value of future states that the agent could wind up in. A gamma 0<gamma <1 helps our algorithms converge and to prevents against infinite rewards if our game lasts forever. 
 (a) What are the key distinctions between the value iteration and policy iteration algorithms, and when might you prefer one to the other? Key distinctions (possible answers): policy iteration is focused on evaluating the policies themselves, while value iteration evaluates states or state-action pairs and implicitly derives a policy from there.
 
- **(e) Fill in the following table explaining the effects of having different gamma values: **
+ **(e) Fill in the following table explaining the effects of having different gamma values:**
 
 | GAMMA    | Effect on policy search:                                                                                                                                                               |
 | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
