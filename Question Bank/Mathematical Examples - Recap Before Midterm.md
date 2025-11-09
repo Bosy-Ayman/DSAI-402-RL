@@ -744,7 +744,7 @@ You can see that $\pi_2$ matches the optimal policy $\pi^*$ found using value it
 
 
 ---
-# Question 4 : 
+# Question 4: 
 
 ![Question 2](components/question_3.png)
 
