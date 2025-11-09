@@ -37,7 +37,7 @@ determines how much the value of a state should take into account the value of f
 | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | GAMMA= 0 | A smaller indicates smaller “horizon,” =0 or a shorter term focus. When is 0, we only consider immediate rewards. We do not consider rewards in the future as having any value.        |
 | GAMMA= 1 | The higher the discount factor, the more =1 the state would value distant future states. When is 1, we begin to act as though rewards at any given point in time are equally valuable. |
-|          |                                                                                                                                                                                        |
+
 **(f) What are two steps to Policy Iteration?**
 
 Policy evaluation and policy improvement.
