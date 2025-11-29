@@ -34,13 +34,14 @@ Week| Date |Topic | Contents | Lecture | Assignment
 7| 11-3 | Model-free | Lab Quiz, Monte Carlo, prediction, first and every visit, q value estimation | [Lecture 6](lectures/lec6.md) | No assignment to prepare for midterm exam
 8| 11-10 | Midterm | | | 
 9| 11-17 | Model-free | Temporal difference learning | [Lecture 7](lectures/lec7.md) | [Assignment 5](assignments/assign5.md)
-10| | QL | Tabular Q-learning, Deep Q-Learning | [Lecture XX] | [Assignment XX]
-11| | QL | DQL + Extensions (Dueling QL) | [Lecture XX] | [Assignment XX]
-12| | Policy Gradient | Policy gradient, policy representation | [Lecture XX] | [Assignment XX]
-13| | Policy Gradient | REINFORCE and its issues | [Lecture XX] | [Assignment XX]
-14| | Actor-Critic method | Actor-Critic, architecture, shared network | [Lecture XX] | [Assignment XX]
-15| | LLM and RL | Chatbot training with RL | [Lecture XX] | [Assignment XX]
-16| | Final | | | 
+10| 11-24 | ~~Cancelled~~ |  | | [Assignment 6](assignments/assign6.md) 
+11| 12-1 | QL | Tabular Q-learning, Deep Q-Learning | [Lecture XX] | [Assignment XX]
+12| 12-8 | QL | DQL + Extensions (Dueling QL) | [Lecture XX] | [Assignment XX]
+13| 12-15 | Policy Gradient | Policy gradient, policy representation | [Lecture XX] | [Assignment XX]
+14| 12-22 | Policy Gradient | REINFORCE and its issues | [Lecture XX] | [Assignment XX]
+15| 12-29 | Actor-Critic method | Actor-Critic, architecture, shared network | [Lecture XX] | [Assignment XX]
+16| | LLM and RL | Chatbot training with RL | [Lecture XX] | [Assignment XX]
+17| | Final | | | 
 
 Please note that the syllabus content is subject to change throughout the semester. Topics may be added or removed based on the instructor’s discretion, student progress, and available time. Your feedback and participation will inform these adjustments to ensure alignment with course goals and schedule constraints.
 
