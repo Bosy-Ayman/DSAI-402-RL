@@ -35,13 +35,20 @@ Week| Date |Topic | Contents | Lecture | Assignment
 8| 11-10 | Midterm | | | 
 9| 11-17 | Model-free | Exploring start, $\epsilon$-greedy MC, Temporal difference learning | [Lecture 7](lectures/lec7.md) | [Assignment 5](assignments/assign5.md)
 10| 11-24 | ~~Cancelled~~ |  | | [Assignment 6](assignments/assign6.md) 
-11| 12-1 | QL | TD(0), n-step TD, effect of $n$ and $\alpha$, Sarsa | [Lecture 8](lectures/lec8.md) | [Assignment 7](assignments/assign7.md) 
-12| 12-8 | QL | Tabular Q-learning, Deep Q-Learning, Extensions (Dueling QL) | [Lecture XX] | perpare for LAB QUIZ
-13| 12-15 | LAB QUIZ, Policy Gradient | Policy gradient, policy representation | [Lecture XX] | Assignment on DQL
+11| 12-1 | TD | TD(0), n-step TD, effect of $n$ and $\alpha$, Sarsa | [Lecture 8](lectures/lec8.md) | [Assignment 7](assignments/assign7.md) 
+12| 12-8 | QL | SARSA, Q-Learning | [Lecture 9](lectures/lec9.md) | prepare for LAB QUIZ
+13| 12-15 | Deep QL | Deep Q-Learning | [Lecture 10](lectures/lec10.md) | LAB QUIZ
+14| 12-22 | Applications | Applications of RL  | [Lecture 11](lectures/lec11.md) | 
+15| 12-29 | ~~Cancelled~~ |  |  | FINAL LAB
+16| | Final | | | 
+
+<!--
+13| 12-15 | LAB QUIZ, Policy Gradient | Deep Q-Learning, Extensions (Dueling QL), Policy gradient, policy representation | [Lecture XX] | Assignment on SARSA vs QLearning
 14| 12-22 | Policy Gradient | REINFORCE and its issues | [Lecture XX] | No assignment, prepare for final lab
 15| 12-29 | FINAL LAB, Actor-Critic method | Actor-Critic, architecture, shared network | [Lecture XX] | No assignment
 16| | LLM and RL | Chatbot training with RL | [Lecture XX] | No assignment
 17| | Final | | | 
+-->
 
 Please note that the syllabus content is subject to change throughout the semester. Topics may be added or removed based on the instructor’s discretion, student progress, and available time. Your feedback and participation will inform these adjustments to ensure alignment with course goals and schedule constraints.
 
