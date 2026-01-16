@@ -1,6 +1,75 @@
-# Question 1 : MC
-not solved yet
+## Q1: MRP (3Pts) - Episodic Environment
 
+**Given Sequences:**
+
+- **Episode 1:** Home $\xrightarrow{0}$ Bus Stop $\xrightarrow{-1}$ Caffe $\xrightarrow{5}$ Office $\xrightarrow{2}$ End
+    
+- **Episode 2:** Bus Stop $\xrightarrow{-2}$ Office $\xrightarrow{3}$ Caffe $\xrightarrow{1}$ Home $\xrightarrow{3}$ End
+    
+
+### Part A: Gamma ($\gamma$) = 0.8
+
+**1. Calculate Returns (**$G$**) for Episode 1**
+
+- $G(\text{Office}) = 2$
+    
+- $G(\text{Caffe}) = 5 + 0.8(2) = 6.6$
+    
+- $G(\text{Bus Stop}) = -1 + 0.8(6.6) = 4.28$
+    
+- $G(\text{Home}) = 0 + 0.8(4.28) = 3.424$
+    
+
+**2. Calculate Returns (**$G$**) for Episode 2**
+
+- $G(\text{Home}) = 3$
+    
+- $G(\text{Caffe}) = 1 + 0.8(3) = 3.4$
+    
+- $G(\text{Office}) = 3 + 0.8(3.4) = 5.72$
+    
+- $G(\text{Bus Stop}) = -2 + 0.8(5.72) = 2.576$
+    
+
+**3. Value Function Table (**$V(s) = \text{Average } G$**)**
+
+|State|G1 (Episode 1)|G2 (Episode 2)|Calculation|**V(s)**|
+|---|---|---|---|---|
+|**Home**|3.424|3.0|$(3.424 + 3) / 2$|**3.212**|
+|**Bus Stop**|4.28|2.576|$(4.28 + 2.576) / 2$|**3.428**|
+|**Caffe**|6.6|3.4|$(6.6 + 3.4) / 2$|**5.0**|
+|**Office**|2.0|5.72|$(2.0 + 5.72) / 2$|**3.86**|
+
+### Part B: Gamma ($\gamma$) = 0
+
+When $\gamma = 0$, only the immediate reward matters ($G_t = R_{t+1}$).
+
+**1. Calculate Returns (**$G$**)**
+
+- **Ep 1:** Office (2), Caffe (5), Bus Stop (-1), Home (0)
+    
+- **Ep 2:** Home (3), Caffe (1), Office (3), Bus Stop (-2)
+    
+
+**2. Value Function Table**
+
+|State|G1 (Episode 1)|G2 (Episode 2)|Calculation|**V(s)**|
+|---|---|---|---|---|
+|**Home**|0|3|$(0 + 3) / 2$|**1.5**|
+|**Bus Stop**|-1|-2|$(-1 - 2) / 2$|**-1.5**|
+|**Caffe**|5|1|$(5 + 1) / 2$|**3.0**|
+|**Office**|2|3|$(2 + 3) / 2$|**2.5**|
+
+### Explanation: Discount Factor Influence
+
+The discount factor $\gamma$ determines the present value of future rewards.
+
+- **When** $\gamma = 0.8$ **(High):** The agent is "farsighted." It cares significantly about future rewards. For example, in Episode 1, the Bus Stop has a negative immediate reward (-1), but a high value (4.28) because it leads to the Caffe and Office, which have high positive rewards.
+    
+- **When** $\gamma = 0$ **(Low):** The agent is "shortsighted." It only cares about the immediate next reward. The value of the Bus Stop drops to -1.5 because the agent ignores the future positive rewards that come after visiting the Bus Stop.
+    
+
+In a navigation scenario, a higher discount factor encourages the agent to endure short-term penalties (like traffic or travel costs) to reach a high-value destination. A discount factor of 0 makes the agent only choose steps that yield immediate gratification, potentially preventing it from ever reaching the destination if the path involves any cost.
 
 
 # Question 2 : Markov Decision Process (MDP) Solution
