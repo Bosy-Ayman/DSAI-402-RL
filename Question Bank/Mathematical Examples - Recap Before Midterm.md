@@ -1,4 +1,8 @@
 ### Questions collected from these links:
+
+Cairo University Drive 1 : https://drive.google.com/drive/folders/1dkEfcOpsroXeU-nCaPn-hlr8y6nWuiaz  --> I didn't extract the relevant questions yet
+Cairo University Drive 2 https://drive.google.com/drive/folders/1WiGlKSzJ0wviSWu25eHqLLJoK1jqkWkh --> I didn't extract the relevant questions yet
+
  https://www.cs.cmu.edu/~15281-s20/recitations/rec8/rec8_sol.pdf
  
 https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/value-iteration.html
