@@ -1,7 +1,106 @@
+# Question 1 : MC
+not solved yet
 
-# Question 1 : Monte Carlo
 
 
+# Question 2 : Markov Decision Process (MDP) Solution
+
+## Problem Statement
+
+We are dealing with a non-episodic environment with two states ($S_1, S_2$) and a set of actions defined by the policy $\Pi$.
+
+**Sample Transition Matrix**
+
+Since the specific transition matrix was not provided, we will initialize the problem with the following values:
+
+|Current State ($s$)|Action ($a$)|Next State ($s'$)|Probability $P(s' \mid s, a)$|Reward $R(s, a, s')$|
+|---|---|---|---|---|
+|$S_1$|$a_1$|$S_1$|0.5|10|
+|||$S_2$|0.5|0|
+|$S_1$|$a_2$|$S_1$|0.0|0|
+|||$S_2$|1.0|2|
+|$S_2$|$a_1$|$S_1$|0.1|0|
+|||$S_2$|0.9|1|
+|$S_2$|$a_2$|$S_1$|0.9|5|
+|||$S_2$|0.1|0|
+
+## Part 0: The Bellman Equation
+
+To find the best policy (Optimal Policy $\pi^*$), we use the **Bellman Optimality Equation**.
+
+The value of a state under the optimal policy, denoted $V^*(s)$, is the maximum expected return achievable from that state. It is defined as:
+
+$$V^*(s) = \max_{a} \sum_{s'} P(s' | s, a) \big[ R(s, a, s') + \gamma V^*(s') \big]$$
+
+Where:
+
+- $s$: Current state ($S_1$ or $S_2$)
+    
+- $a$: Action taken
+    
+- $s'$: Next state
+    
+- $P(s' | s, a)$: Transition probability
+    
+- $R(s, a, s')$: Reward for the transition
+    
+- $\gamma$: Discount factor
+    
+
+## Part I: Algorithm for the Policy (Given $V_1=50, V_2=55$)
+
+Here, we are asked to find the policy $\pi$ (which action to take) given that we already know the values of the states are $V(S_1) = 50$ and $V(S_2) = 55$. We assume $\gamma = 0.9$. This process is known as **Policy Extraction**.
+
+### The Algorithm
+
+For each state $s$, the policy $\pi(s)$ is the action $a$ that maximizes the immediate reward plus the discounted future value.
+
+$$\pi(s) = \arg\max_{a} \sum_{s'} P(s' | s, a) \big[ R(s, a, s') + \gamma V(s') \big]$$
+
+### Application to our Matrix
+
+**Calculations for State** $S_1$ **&** $S_2$
+
+|State|Action|Calculation Logic|Q-Value|Optimal Action?|
+|---|---|---|---|---|
+|$S_1$|$a_1$|$0.5[10 + 0.9(50)] + 0.5[0 + 0.9(55)]$|**52.25**|**Yes** ($\pi(S_1) = a_1$)|
+|$S_1$|$a_2$|$0[0 + 0.9(50)] + 1.0[2 + 0.9(55)]$|51.50|No|
+|$S_2$|$a_1$|$0.1[0 + 0.9(50)] + 0.9[1 + 0.9(55)]$|**49.95**|**Tie**|
+|$S_2$|$a_2$|$0.9[5 + 0.9(50)] + 0.1[0 + 0.9(55)]$|**49.95**|**Tie**|
+
+**Result:**
+
+- $\pi(S_1) = a_1$
+    
+- $\pi(S_2) = \{a_1, a_2\}$ (Either action is optimal)
+    
+
+## Part II: Calculate Optimal Policy ($\gamma = 0.9$)
+
+To find the optimal policy from scratch, we use **Value Iteration**.
+
+### Step 1: Initialization
+
+Initialize $V_0(S_1) = 0$ and $V_0(S_2) = 0$.
+
+### Step 2: Iteration 1 ($k=1$)
+
+We calculate $V_1$ using the Bellman Update Rule:
+
+$$V_{k+1}(s) = \max_{a} \sum_{s'} P(s' | s, a) \big[ R(s, a, s') + \gamma V_k(s') \big]$$
+
+**Calculations using** $V_0=0$
+
+|State|Action|Calculation Logic ($V_0=0$)|Q-Value|New $V_1(s)$|
+|---|---|---|---|---|
+|$S_1$|$a_1$|$0.5[10 + 0] + 0.5[0 + 0]$|**5.0**|$V_1(S_1) = 5.0$|
+|$S_1$|$a_2$|$1.0[2 + 0]$|2.0||
+|$S_2$|$a_1$|$0.1[0] + 0.9[1]$|0.9||
+|$S_2$|$a_2$|$0.9[5] + 0.1[0]$|**4.5**|$V_1(S_2) = 4.5$|
+
+### Step 3: Iterate until Convergence
+
+You would repeat Step 2 using the new values ($V_1(S_1)=5, V_1(S_2)=4.5$) until the numbers stabilize. Once stable, you perform the **Final Extraction** (same as Part I) to determine the best policy.
 # Question 2: Policy Iteration Problem & Solution
 ## Method 1 : solve an equation to find the V0(S)
 ## 1. The Full Question
@@ -206,3 +305,35 @@ $$Q(s, a) = R(s,a) + \gamma \sum P(s'|s,a) V_1(s')$$
 |**S1**|a1|**a2**|
 |**S2**|a2|**a2**|
 |**S3**|a2|**a2**|
+
+---
+# Question 3:  Complexity
+
+Define $|S|$ as the number of states and $|A|$ as the number of actions.
+
+### 1. Policy Evaluation
+
+Policy evaluation computes the value function $V^\pi(s)$ for a specific, fixed policy.
+
+- **Analytical Solution (Solving Linear Equations):** $O(|S|^3)$
+    
+    - This approach involves inverting a matrix of size $|S| \times |S|$ to solve $(I - \gamma P)V = R$.
+        
+- **Iterative Solution:** $O(|S|^2)$ per iteration
+    
+    - For each state, we iterate over all possible next states to update the value.
+        
+
+### 2. Policy Improvement
+
+Policy improvement generates a new, greedy policy by looking at the current value function $V(s)$.
+
+- **Complexity:** $O(|S|^2 \cdot |A|)$
+    
+    - To improve the policy, we must calculate the Q-value for every action in every state.
+        
+    - For **each state** ($|S|$), we iterate over **each action** ($|A|$).
+        
+    - For each action, we sum over the probabilities of **next states** ($|S|$).
+        
+    - **Total:** $|S| \times |A| \times |S| = O(|S|^2 |A|)$.
