@@ -1005,6 +1005,8 @@ This example shows the true power of policy iteration. With only two iterations,
 ![Question 5](components/question_7.png)
 
 ![Question_7.1](components/question_7_1.png)
-# Question 6 : Bellman
 
-![Question8](question_8.png)
+---
+# Question 6 : Bellman --> From Cairo
+
+![Question8](components/question_8.png)
