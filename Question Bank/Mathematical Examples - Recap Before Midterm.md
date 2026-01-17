@@ -6,6 +6,8 @@
 
 **Cairo University AI Exams :** https://drive.google.com/drive/folders/1G5jykkoGMt8XAPdeOP2kP_ZqghpoFRdz
 
+https://inst.eecs.berkeley.edu/~cs188/fa22/assets/discussions/disc06-rl-sols.pdf --> questions need to be extracted
+
  https://www.cs.cmu.edu/~15281-s20/recitations/rec8/rec8_sol.pdf
  
 https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/value-iteration.html
