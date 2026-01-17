@@ -896,7 +896,7 @@ Policy iteration operates in a loop with two main steps:
     
     - **(a) Policy Evaluation:** Evaluate the current policy $\pi_i$ by computing the utility $V^{\pi_i}(s)$ for all states $s$. $V^{\pi_i}(s)$ is the expected utility of starting in state $s$ and following policy $\pi_i$ forever.
         
-        > This requires solving a system of $|S|$ linear equations. For each state $s$, the value is defined by the Bellman equation without the $\max$ operator, since the action $\pi_i(s)$ is fixed:
+        > ]This requires solving a system of $|S|$ linear equations. For each state $s$, the value is defined by the Bellman equation without the $\max$ operator, since the action $\pi_i(s)$ is fixed:
         > 
         > $$V^{\pi_i}(s) = \sum_{s'} T(s, \pi_i(s), s') [R(s, \pi_i(s), s') + \gamma V^{\pi_i}(s')]$$
         > 
@@ -1002,7 +1002,8 @@ This example shows the true power of policy iteration. With only two iterations,
 
 2. Consider an undiscounted Markov Reward Process with two states A and B. The transition matrix and reward function are unknown, but you have observed two sample episodes: A+3 → A+2 → B−4 → A+4 → B−3 → terminate B−2 → A+3 → B−3 → terminate In the above episodes, sample state transitions and sample rewards are shown at each step, e.g. A+3 → A indicates a transition from state A to state A, with a reward of +3. 
 ---
-# Question 5 : Monte Carlo (Every Visit)
+# Question 5 : Monte Carlo 
+## 1 - Every Visit
 ![Question 5](components/mc_2.png)
 
 ![Question_1](components/mc.png)
