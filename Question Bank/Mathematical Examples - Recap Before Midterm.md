@@ -1000,6 +1000,11 @@ This example shows the true power of policy iteration. With only two iterations,
 2. Consider an undiscounted Markov Reward Process with two states A and B. The transition matrix and reward function are unknown, but you have observed two sample episodes: A+3 → A+2 → B−4 → A+4 → B−3 → terminate B−2 → A+3 → B−3 → terminate In the above episodes, sample state transitions and sample rewards are shown at each step, e.g. A+3 → A indicates a transition from state A to state A, with a reward of +3. 
 ---
 
+# Question 5 : Monte Carlo --> from Cairo
 
+![Question 5](components/question_7.png)
 
+![Question_7.1](components/question_7_1.png)
+# Question 6 : Bellman
 
+![Question8](question_8.png)
