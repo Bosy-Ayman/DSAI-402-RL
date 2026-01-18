@@ -5,9 +5,12 @@
 **Cairo University RL Drive 2 :**  https://drive.google.com/drive/folders/1WiGlKSzJ0wviSWu25eHqLLJoK1jqkWkh 
 
 [sarsa,qleaning Numerical example - Google Drive](https://drive.google.com/drive/u/0/folders/1huJegZPq0f6htsYAi7DpKIunNWKuhiXE)
+
+https://www.cs.cmu.edu/~15281-s20/recitations/rec9/rec9_sol.pdf --> it include TD and sarsa
 # Question 1 
 
 **Solved here :** https://www.youtube.com/watch?v=2sisptKZils&list=PLxoZxAo3dSLJ_OJOA8hmuoMmHlblXLyzf&index=16&t=249s (10 min)
+
 ![Question 1](components/recap1.png)
 ![Question1](components/after_mid.png)
 
