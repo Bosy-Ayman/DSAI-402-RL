@@ -80,4 +80,141 @@ TD value learning provides a value for each state for a given policy . It is imp
 ---
 # Question 8: TD n step
 ![N step](components/nstep2.png)
-# Question 9 :
+---
+# Question 9 : SARSA / N Step SARSA / Q learning
+
+
+## Part 1: The Setup (Shared Environment)
+
+To clearly see the difference between Q-Learning and SARSA, we assume some learning has already happened.
+
+**Parameters:**
+
+- **Discount Factor (**$\gamma$**):** $0.9$
+    
+- **Learning Rate (**$\alpha$**):** $0.5$
+    
+- **Exploration (**$\epsilon$**):** $0.1$ (10% chance to explore)
+    
+
+**The Scenario:** We are at State **A**.
+
+- **Action Right** leads to State **B** (Reward = 0).
+    
+- From State **B**, there are two known paths:
+    
+    - **Action Best:** leads to $+50$ reward ($Q(B, \text{Best}) = 50$).
+        
+    - **Action Bad:** leads to $-10$ reward ($Q(B, \text{Bad}) = -10$).
+        
+
+**Current Q-Values:**
+
+- $Q(A, \text{Right}) = 10$ (Current estimate)
+    
+- $Q(B, \text{Best}) = 50$
+    
+- $Q(B, \text{Bad}) = -10$
+    
+
+## Part 2: Q-Learning (Off-Policy)
+
+**Concept:** Q-Learning assumes you will act _optimally_ in the next state, even if you are currently exploring or making mistakes. It is "optimistic."
+
+**The Episode Step:**
+
+1. We are at **A**. We choose **Right**.
+    
+2. We arrive at **B**. Reward $R = 0$.
+    
+3. **Crucial Moment:** Q-Learning looks at State B and asks, _"What is the max value possible here?"_
+    
+
+**The Math:**
+
+$$Q(S, A) \leftarrow Q(S, A) + \alpha [ R + \gamma \max_{a'} Q(S', a') - Q(S, A) ]$$
+
+Substitute values for updating $Q(A, \text{Right})$:
+
+1. **Max Future Value:** $\max(50, -10) = 50$.
+    
+2. **TD Target:** $0 + 0.9(50) = 45$.
+    
+3. **TD Error:** $45 - 10 = 35$.
+    
+4. **Update:** $10 + 0.5(35) = 27.5$.
+    
+
+**New** $Q(A, \text{Right}) = 27.5$ _(Note: The value increased because it assumes we will take the "Best" action next.)_
+
+## Part 3: SARSA (On-Policy)
+
+**Concept:** SARSA learns from the _actual_ path taken. If the agent explores and picks a bad action, SARSA effectively says, _"This path leads to a mistake, so the previous state is less valuable."_
+
+**The Episode Step:**
+
+1. We are at **A**. We choose **Right**.
+    
+2. We arrive at **B**. Reward $R = 0$.
+    
+3. **Crucial Moment:** Because of $\epsilon$-greedy (exploration), the agent decides to pick **Action Bad** for the next step.
+    
+
+**The Math:**
+
+$$Q(S, A) \leftarrow Q(S, A) + \alpha [ R + \gamma Q(S', A') - Q(S, A) ]$$
+
+Substitute values for updating $Q(A, \text{Right})$:
+
+1. **Actual Future Value:** We picked "Bad", so we use $Q(B, \text{Bad}) = -10$.
+    
+2. **TD Target:** $0 + 0.9(-10) = -9$.
+    
+3. **TD Error:** $-9 - 10 = -19$.
+    
+4. **Update:** $10 + 0.5(-19) = 0.5$.
+    
+
+**New** $Q(A, \text{Right}) = 0.5$ _(Note: The value dropped significantly because the agent actually plans to take the "Bad" action next.)_
+
+## Part 4: Exam Question (n-step SARSA)
+
+**Question:** You are given the following 3-step trajectory taken by an agent. Calculate the **2-step SARSA** update for the starting state $S_0$.
+
+**Trajectory:**
+
+$$S_0 \xrightarrow{A_0} R_1=2 \xrightarrow{} S_1 \xrightarrow{A_1} R_2=5 \xrightarrow{} S_2 \xrightarrow{A_2} \dots$$
+
+**Given:**
+
+- $Q(S_0, A_0) = 3$
+    
+- $Q(S_1, A_1) = 4$
+    
+- $Q(S_2, A_2) = 10$
+    
+- $\gamma = 0.9$
+    
+- $\alpha = 0.1$
+    
+
+**Solution:**
+
+**Step 1: Calculate the n-step Return (**$G_t^{(n)}$**)** For $n=2$, we sum the rewards for 2 steps, then bootstrap from the Q-value at the 3rd state ($S_2$).
+
+$$G_0^{(2)} = R_1 + \gamma R_2 + \gamma^2 Q(S_2, A_2)$$$$G_0^{(2)} = 2 + 0.9(5) + 0.9^2(10)$$$$G_0^{(2)} = 2 + 4.5 + 0.81(10)$$$$G_0^{(2)} = 2 + 4.5 + 8.1$$$$G_0^{(2)} = 14.6$$
+
+**Step 2: Apply the Update Rule**
+
+$$Q(S_0, A_0) \leftarrow Q(S_0, A_0) + \alpha [ G_0^{(2)} - Q(S_0, A_0) ]$$$$Q(S_0, A_0) \leftarrow 3 + 0.1 [ 14.6 - 3 ]$$$$Q(S_0, A_0) \leftarrow 3 + 0.1 [ 11.6 ]$$$$Q(S_0, A_0) \leftarrow 3 + 1.16$$
+
+**Final Answer:** $Q(S_0, A_0) = 4.16$
+
+## Summary Cheat Sheet
+
+|Feature|Q-Learning|SARSA|n-step SARSA|
+|---|---|---|---|
+|**Equation**|$R + \gamma \max Q(S', a')$|$R + \gamma Q(S', A')$|$R_1 + \dots + \gamma^n Q(S_{t+n}, A_{t+n})$|
+|**Bootstrap**|Immediate (1-step)|Immediate (1-step)|Delayed (n-steps)|
+|**Policy**|Off-Policy (optimistic)|On-Policy (realistic)|On-Policy|
+|**Updates**|Even if you act randomly, it learns the optimal path.|If you act randomly, it learns the random path.|Needs to wait $n$ steps to update.|
