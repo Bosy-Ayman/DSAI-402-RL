@@ -25,11 +25,15 @@
 # Question 4 : 
 Briefly explain the insights observed in the below graph:
 ![graph](components/graph.png)
+
 Answer [2 Points]:
 The figure demonstrates the effect of exploration vs. exploitation.
+
 ==When ε = 0, t==he average reward being plateaued (i.e., almost constant)
+
 ==As ε is increased from 0 → 0.1==, the average reward starts to increase as the agent can randomly
 choose actions that can offer better rewards instead of being limited to its experience.
+
 ==As ε is increased from 0.01 → 0.1==, the rate of increase is better as the agent can find better
 reward in less number of steps compared to 0.01.
 
@@ -39,6 +43,7 @@ reward in less number of steps compared to 0.01.
 **b. In the ε-greedy action selection method, and for the case of two actions and ε = 0.25, what
 is the probability that the greedy action is selected? Elaborate on your answer.
 Answer [2 Points]:**
+
 Total = 0.75+ 0.125 = 0.875
 The Probability of choosing the greedy action: 1- ε = 0.75 [1 Point]
 The probability of choosing the greedy action but randomly is ε * (1⁄2) = 0.25*0.5 = 0.125
@@ -47,6 +52,7 @@ The probability of choosing the greedy action but randomly is ε * (1⁄2) = 0.2
 **c. What is the purpose of using the discount factor ‘γ’ when estimating returns in an MDP?
 Is it necessary for all types of RL problems and why?**
 Answer [2 Points]:
+
 Problems with finite episodes can be solved without a discount factor, but problems with
 infinite episodes must use a discount factor so we can have a bounded cumulative reward.
 Hence, it is not mandatory in all cases but it simplifies equations by formulating solution
@@ -62,6 +68,9 @@ derivation
 ε= 0.5x0.5=0.25
 The probability is 0.5+0.25 = 0.75
 
+**Whats the main shortcoming of TD learning that Q-learning resolves?**
+TD value learning provides a value for each state for a given policy . It is impossible to get the optimal policy directly from the learned values because the state values are learned for the given policy . And if we want to follow policy iteration to extract an improved policy from these values, we would need to use the R and T functions (which we dont have). With Q-learning, we can get values of Q-states (i.e., (state, action) pairs) of the optimal policy, from which we can extract an optimal policy simply by taking the action corresponding to the maximum Q-value from each state.
+
 ---
 # Question 7 : TD n step
 
@@ -69,4 +78,6 @@ The probability is 0.5+0.25 = 0.75
 ![answer](components/nstepanswer.png)
 
 ---
-# Question 8
+# Question 8: TD n step
+![N step](components/nstep2.png)
+# Question 9 :
