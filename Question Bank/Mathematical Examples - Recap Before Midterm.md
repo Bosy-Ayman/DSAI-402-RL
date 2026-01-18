@@ -53,9 +53,6 @@ Policy evaluation and policy improvement.
 
 Key distinctions (possible answers): policy iteration is focused on evaluating the policies themselves, while value iteration evaluates states or state-action pairs and implicitly derives a policy from there.
 
-| Model Based | Model Free |
-| ----------- | ---------- |
-|             |            |
 
 # Question 2 - Policy Iteration & Value Iteration: 
 
