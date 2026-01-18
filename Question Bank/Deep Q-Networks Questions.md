@@ -113,11 +113,12 @@ Discuss the trade-offs associated with the size of the Replay Buffer. What are t
 Clearly distinguish between the Policy Network ($\theta$) and the Target Network ($\theta^-$) in terms of their respective roles in the Bellman update and the frequency of their weight updates.
 
 **Answer 14:**
-| Feature | Policy Network ($\theta$) | Target Network ($\theta^-$) |
-| :--- | :--- | :--- |
-| **Role in Bellman Update** | Calculates the **Prediction** $Q(s_t, a_t; \theta)$ | Calculates the **Target** $y_t = r + \gamma \max_a Q(s', a; \theta^-)$ |
-| **Weight Update** | Updated at **every training step** via gradient descent. | Updated **periodically** (every $C$ steps) via a hard copy from $\theta$. |
-| **Primary Function** | To learn the optimal Q-function and determine the action selection. | To provide a stable, fixed reference point for the optimization process. |
+
+| Feature                    | Policy Network ($\theta$)                                           | Target Network ($\theta^-$)                                               |
+| :------------------------- | :------------------------------------------------------------------ | :------------------------------------------------------------------------ |
+| **Role in Bellman Update** | Calculates the **Prediction** $Q(s_t, a_t; \theta)$                 | Calculates the **Target** $y_t = r + \gamma \max_a Q(s', a; \theta^-)$    |
+| **Weight Update**          | Updated at **every training step** via gradient descent.            | Updated **periodically** (every $C$ steps) via a hard copy from $\theta$. |
+| **Primary Function**       | To learn the optimal Q-function and determine the action selection. | To provide a stable, fixed reference point for the optimization process.  |
 
 **Q15: $\epsilon$-Greedy Policy in DQN**
 Explain the role of the $\epsilon$-greedy policy in the DQN algorithm. Why is exploration (the $\epsilon$ part) still necessary even when using a function approximator like a neural network?

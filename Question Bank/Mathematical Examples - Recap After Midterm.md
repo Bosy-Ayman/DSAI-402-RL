@@ -6,6 +6,8 @@
 
 [sarsa,qleaning Numerical example - Google Drive](https://drive.google.com/drive/u/0/folders/1huJegZPq0f6htsYAi7DpKIunNWKuhiXE)
 # Question 1 
+
+**Solved here :** https://www.youtube.com/watch?v=2sisptKZils&list=PLxoZxAo3dSLJ_OJOA8hmuoMmHlblXLyzf&index=16&t=249s (10 min)
 ![Question 1](components/recap1.png)
 ![Question1](components/after_mid.png)
 
@@ -25,14 +27,15 @@ Briefly explain the insights observed in the below graph:
 ![graph](components/graph.png)
 Answer [2 Points]:
 The figure demonstrates the effect of exploration vs. exploitation.
-When ε = 0, the average reward being plateaued (i.e., almost constant)
-As ε is increased from 0 → 0.1, the average reward starts to increase as the agent can randomly
+==When ε = 0, t==he average reward being plateaued (i.e., almost constant)
+==As ε is increased from 0 → 0.1==, the average reward starts to increase as the agent can randomly
 choose actions that can offer better rewards instead of being limited to its experience.
-As ε is increased from 0.01 → 0.1, the rate of increase is better as the agent can find better
+==As ε is increased from 0.01 → 0.1==, the rate of increase is better as the agent can find better
 reward in less number of steps compared to 0.01.
 
+
 ---
-# Question 5: Theoretical
+# Question 6: Theoretical
 **b. In the ε-greedy action selection method, and for the case of two actions and ε = 0.25, what
 is the probability that the greedy action is selected? Elaborate on your answer.
 Answer [2 Points]:**
@@ -58,11 +61,12 @@ derivation
 0.25% chance derived of being chosen as the random option with
 ε= 0.5x0.5=0.25
 The probability is 0.5+0.25 = 0.75
-**c. What is the purpose of using a discount factor g when defining returns in an
-MDP? Is it necessary for all types of RL problems and why?**
 
-Allow balancing between immediate and future rewards and can
-be set between [0,1] to either be myopic or far-sighting. (1 Point)
-No, it is a must for infinite horizon problems only. It is optional
-for episodic / finite horizon problems. (1 Point)
+---
+# Question 7 : TD n step
 
+![Question](components/nstep.png)
+![answer](components/nstepanswer.png)
+
+---
+# Question 8
